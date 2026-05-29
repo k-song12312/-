@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 sns.set(style="white", context="notebook", palette="muted")
 
 # 导入数据
-train = pd.read_csv("泰坦尼克号数据/train.csv")
-test = pd.read_csv("泰坦尼克号数据/test.csv")
+train = pd.read_csv("数据分析/train.csv")
+test = pd.read_csv("数据分析/test.csv")
 
 # print("训练数据大小:",train.shape) #返回数据有多少行，多少列
 # print("测试数据大小:",test.shape)
@@ -32,10 +32,13 @@ sns.barplot(data=train,x="Embarked",y="Survived")
 # y轴显示的是平均值，比如C港口条形高度约为0.55，意味着从C港口登船的乘客中约55%幸存。
 plt.show()
 
+
 s = full.groupby("Embarked")["Survived"].value_counts().to_frame()
 # full.groupby("Embarked")：按"Embarked"（登船港口）列对数据进行分组
 # ["Survived"]：选择"Survived"（是否生存）列
 # .value_counts()：统计每个分组中"Survived"列各个值（0=死亡，1=生存）的出现次数
 # .to_frame()：将统计结果转换为DataFrame格式
-
-#print(s)
+##s2 = s/s.sum(level=0) # s.sum(level=0) 的含义，指定沿 第 0 层索引（Embarked） 进行聚合，即：把同一个港口下，存活=0 和存活=1 的数值加在一起
+# s = 每个港口中存活/死亡的人数。s2 = 每个港口中存活/死亡的占比
+##pd.merge(s,s2,left_index=True,right_index=True,suffixes=['_num',"_rate"])
+print(s)
