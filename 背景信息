@@ -1,0 +1,45 @@
+C港法国乘客的存活率高，可能与他们头等舱乘客多有关
+
+
+
+项目分析思路
+1. 明确业务目标与需求
+2. 数据收集与理解
+3. 探索性数据分析
+
+
+把每一类数据和目标数据都放在一起单独分析
+
+
+
+merge用法
+合并两个表
+
+pd.merge(表A, 表B, on="共同列名")
+
+on="列名"           # 按某列合并（最常用）
+left_index=True,    # 左表按索引对齐
+right_index=True    # 右表按索引对齐
+
+how="inner"   # 只保留两边都有的（默认）
+how="left"    # 以左表为准，右表没匹配到的填 NaN
+how="right"   # 以右表为准
+how="outer"   # 全保留，没匹配到的填 NaN
+
+suffixes=["_左表后缀", "_右表后缀"]   # 当两个表有相同列名时，用后缀区分
+
+groupby用法
+groupby能返回DataFrame和Series两种数据类型
+
+df.groupby("列名")           # 按某列分组
+df.groupby(["列1", "列2"])   # 按多列分组
+df.groupby(level=0)          # 按索引层级分组（多级索引时用）
+
+.groupby("Embarked").sum()        # 求和
+.groupby("Embarked").mean()       # 平均值
+.groupby("Embarked").count()      # 计数（算非空值）
+.groupby("Embarked").max()        # 最大值
+.groupby("Embarked")["Survived"].value_counts()  # 对指定列Embarked分类后，再拿Survived继续分类，.value_counts() 是值出现了几次
+
+
+
